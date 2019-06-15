@@ -42,7 +42,7 @@ distclean: clean
 
 dist:
 	@echo Compressing distribution $(BASENAME)-$(VERSION).tgz...
-	@cd .. && tar cf - ./$(BASENAME) | gzip -9 > \
+	@cd .. && tar -cf - --exclude=.git ./$(BASENAME) | gzip -9 > \
 	$(BASENAME)-$(VERSION).tgz && echo Compression successful. \
 	|| die
 
