@@ -1,0 +1,21 @@
+==================================================
+                 .:[NCPRJ v0.1]:.
+==================================================
+confproj  - Project for generating makefiles for a
+            project.
+
+NOTE: Run this command inside of a C source
+directory.
+--------------------------------------------------
+creatproj - Main project use this to create an
+            entire project.
+
+NOTE: First use 1, to create a new directory.
+Second, use 3 to add files to new directory. Next,
+use 4 to generate a makefile for the new project.
+
+NOTE: Option 2, to change to a different directory
+instead of using the current directory.
+==================================================
+                    .:[EOF]:.
+==================================================
