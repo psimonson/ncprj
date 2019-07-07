@@ -41,6 +41,8 @@ int init_dir(struct dir *dir)
 		write_log(CLOG0, ERRMSG "Cannot open directory.\n");
 		return 1;
 	}
+	write_log(CLOG0, DBGMSG "Opened directory: %s\n",
+		dir->name);
 	return 0;
 }
 /* Gets the next directory in the structure.
@@ -63,6 +65,7 @@ char *get_dir(struct dir *dir)
  */
 void close_dir(struct dir *dir)
 {
+	write_log(CLOG0, DBGMSG "Closing directory: %s\n", dir->name);
 	memset(dir->name, 0, sizeof(dir->name));
 	closedir(dir->p);
 }
@@ -78,6 +81,8 @@ void get_sources(struct dir *dir, file_t *file)
 		if(!strstr(p->d_name, ".c.") && strstr(p->d_name, ".c")) {
 			writef_file(file, "%s ", p->d_name);
 			printf("source:%s\n", p->d_name);
+			write_log(CLOG0, DBGMSG "Source file [ADDED]: %s\n",
+				p->d_name);
 		}
 	}
 	rewinddir(dir->p);
@@ -123,12 +128,13 @@ int gen_make(struct dir *dir)
 		"$(OBJECTS) $(LDFLAGS)\n\n"
 		"clean:\n\t@echo Cleaning directory...\n\t"
 		"@rm -f *~ *.log $(OBJECTS) $(TARGET)\n");
+	write_log(CLOG0, DBGMSG "Created file: %s\n", get_name_file(&file));
 	close_file(&file);
 	return 0;
 
 error:
-	close_file(&file);
 	write_log(CLOG0, ERRMSG "Cannot create makefile for directory.\n");
+	close_file(&file);
 	return 1;
 }
 /* Where program execution begins
