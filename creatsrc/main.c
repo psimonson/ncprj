@@ -119,6 +119,7 @@ void main_loop()
 			if(read_line(buf, sizeof(buf)) > 0) {
 				printf("Directory %s created.\n", buf);
 				make_dir(buf);
+				break;
 			}
 			printf("Nothing was entered!\n");
 		break;
@@ -128,6 +129,7 @@ void main_loop()
 			if(read_line(buf, sizeof(buf)) > 0) {
 				printf("Changing to directory: %s\n", buf);
 				chdir(buf);
+				break;
 			}
 			printf("Nothing was entered!\n");
 		break;
@@ -158,8 +160,8 @@ void main_loop()
 			printf("Finished generating makefile.\n");
 		break;
 		default:
-			/* unknown command */
-			printf("Unknown command: '%c'\n", c);
+			/* unknown selection */
+			printf("Unknown selection: '%c'\n", c);
 		break;
 		}
 	} while(c != '0');
